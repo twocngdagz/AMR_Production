@@ -1,0 +1,22 @@
+#<DirectoryMatch "/var/www/vhosts/anothermotherrunnerstore.com/httpdocs/">
+#	php_admin_value open_basedir "/var/www/vhosts/anothermotherrunnerstore.com/httpdocs/:/tmp/:/"
+#</DirectoryMatch>
+
+RewriteEngine On
+RewriteCond %{REQUEST_URI} ^/system.*
+RewriteRule ^(.*)$ index.php?/$1 [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)$ index.php?/$1 [L]
+ErrorDocument 404 index.php
+
+<IfModule mod_security.c>
+  SecFilterEngine Off
+  SecFilterScanPOST Off
+</IfModule>
+
+#RewriteEngine on
+#RewriteBase /
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^(.*)$ index.php?/$1 [L]
